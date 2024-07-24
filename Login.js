@@ -1,27 +1,26 @@
-const loginForm = document.getElementById("login_form");
-const loginButton = document.getElementById("submit");
-let loginErrorMsg = document.getElementByName("login-error-msg");
-
-// Prevents form from being submitted when login/submit button is clicked
-loginButton.addEventListener("click", (e) => {
-    e.preventDefault();
-
+function login(loginForm, loginErrorMsg, alertFunction) {
     const email = loginForm.Email.value;
     const password = loginForm.Password.value;
-    
-    if (email === "user@gmail.com" && password === "password") {
-        alert("You have successfully logged in.");
-       // location.reload();
 
-    } else if (email !== "user@gmail.com" && password === "password") {
+    if (!email || !password) {
+        throw new Error('Email and password are required');
+    } else if (email === "user@gmail.com" && password === "password") {
+        alertFunction("You have successfully logged in.");
+        return true;
+    } else if (password === "password" && email !== "user@gmail.com") {
+        loginErrorMsg.textContent = "Invalid Email!";
         loginErrorMsg.style.opacity = 1;
-        
+        return false;
     } else if (email === "user@gmail.com" && password !== "password") {
-        loginErrorMsg = "Invalid Password!";
+        loginErrorMsg.textContent = "Invalid Password!";
         loginErrorMsg.style.opacity = 1;
-
-    } else (email !== "user@gmail.com" && password !== "password") {
-        loginErrorMsg = "Invalid Email & Password!";
+        return false;
+    } else {
+        loginErrorMsg.textContent = "Invalid Email & Password!";
         loginErrorMsg.style.opacity = 1;
+        return false;
     }
-} )
+}
+
+module.exports = login;
+

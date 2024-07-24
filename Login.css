@@ -60,7 +60,7 @@ label{
     border-style: hidden;
 }
 
-#submit{
+#login{
     width: 300px;
     height: 30px;
     display: block;
@@ -86,7 +86,7 @@ p{
     display: inline;
     margin: auto;
 }
-#button{
+#signUp{
     width: 300px;
     height: 30px;
     display: block;
